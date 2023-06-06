@@ -1,10 +1,14 @@
-float scaleFactor = 1.0;
-float translateX = 0;
-float translateY = 0;
+float scaleFactor = 1;
+float translateX = 300;
+float translateY = 500;
 float base_color = 200;
 
+int count = 0;
+
+boolean iterate_hue = false;
+
 void setup() {
-  size(800, 800);
+  size(1000, 1000);
   
 }
 
@@ -12,23 +16,25 @@ void draw() {
 
   colorMode(HSB, 360, 100, 100);
 
-
+  if(iterate_hue){
+    base_color += 1;
+  }
 
   loadPixels();
 
-  int max_iterations = 50;
+  int max_iterations = 100;
 
   for (int x = 0; x < width; x++) {
     for (int y = 0; y < height; y++) {
 
       int loc = x + y * width;
 
-      float sX = map(translateX, 0, width, 0, 1);
-      float sY = map(translateY, 0, height, 0, 1);
+      float sX = map(translateX, 0, width, -2, 2);
+      float sY = map(translateY, 0, height, -2, 2);
 
 
-      float a = map(x, 0, width, sX - scaleFactor, sX + scaleFactor);
-      float b = map(y, 0, height, sY - scaleFactor, sY + scaleFactor);
+      float a = map(x, 0, width, sX - scaleFactor*1.5, sX + scaleFactor*1.5);
+      float b = map(y, 0, height, sY - scaleFactor*1.5, sY + scaleFactor*1.5);
 
 
       int n = 0;
@@ -69,14 +75,16 @@ void draw() {
     }  
   }
   updatePixels();
-
+  count++;
   
 }
 
 void keyPressed() {
     float delta = 1.02;
     if (key == 'r') {
-        scaleFactor = 1;
+      scaleFactor = 1;
+      translateX = 300;
+      translateY = 500;
     } else if (keyCode == UP) {
       scaleFactor /= delta;
     } else if (keyCode == DOWN) {
@@ -91,6 +99,12 @@ void keyPressed() {
       translateX += 20;
     } else if (key == 'c') {
       base_color += 20;
+    } else if (key == 'h') {
+      if(iterate_hue){
+        iterate_hue = false;
+      } else {
+        iterate_hue = true;
+      }
     }
 }
 
@@ -106,9 +120,11 @@ void mouseWheel(MouseEvent event) {
 }
 
 void mouseDragged() {
-  // Pan the image when the mouse is dragged
-  translateX -= mouseX - pmouseX;
-  translateY -= mouseY - pmouseY;
+  translateX -= (mouseX - pmouseX) * scaleFactor;
+  translateY -= (mouseY - pmouseY) * scaleFactor;
+  
 
-  //println(translateX);
+  println("translate: ", translateX);
+  println("scale: ", scaleFactor);
+
 }
