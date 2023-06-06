@@ -50,7 +50,7 @@ void draw() {
         a = next_a + c_a;
         b = next_b + c_b;
 
-        if (abs(a+b) > 16){
+        if (abs(a+b) > 32){
             break;
         }
 
@@ -122,9 +122,5 @@ void mouseWheel(MouseEvent event) {
 void mouseDragged() {
   translateX -= (mouseX - pmouseX) * scaleFactor;
   translateY -= (mouseY - pmouseY) * scaleFactor;
-  
-
-  println("translate: ", translateX);
-  println("scale: ", scaleFactor);
 
 }
