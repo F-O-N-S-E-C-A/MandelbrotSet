@@ -3,6 +3,7 @@ float translateX = 300;
 float translateY = 500;
 float base_color = 200;
 boolean tricorn = false;
+boolean burning_ship = false;
 
 int count = 0;
 
@@ -43,22 +44,27 @@ void draw() {
       float c_a = a;
       float c_b = b;
 
-      while(n < max_iterations){
+      while(n < max_iterations && abs(a*a + b*b) < 4){
 
         float next_a = a*a - b*b;
         float next_b = 2*a*b;
+
+        if(burning_ship){
+          next_b = abs(next_b);
+        }
 
         if(tricorn){
           next_b = next_b * -1;
         }
         
-
         a = next_a + c_a;
         b = next_b + c_b;
 
-        if (abs(a+b) > 32){
+        //scales effect
+        /*
+        if (abs(a+b) > 16){
             break;
-        }
+        }*/
 
         n++;
 
@@ -116,6 +122,12 @@ void keyPressed() {
         tricorn = false;
       } else {
         tricorn = true;
+      }
+    } else if (key == 'b') {
+      if(burning_ship){
+        burning_ship = false;
+      } else {
+        burning_ship = true;
       }
     }
 }
