@@ -42,3 +42,6 @@ Use the following controls to interact with the visualization:
 - next_b = abs(-2*a*b);
 
 <img src="https://github.com/F-O-N-S-E-C-A/MandelbrotSet/blob/main/burning_ship.png" width="500">
+
+
+While Processing does not natively support the double data type, it is possible to utilize it to achieve higher precision, enabling greater zoom capabilities. However, achieving this requires overriding Processing's built-in functions with custom implementations, as Processing only supports float32 (single-precision) by default. By implementing your own functions, you can work with double data types, providing increased precision for your calculations and allowing for finer control over zooming operations in Processing.
