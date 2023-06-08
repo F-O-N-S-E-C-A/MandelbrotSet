@@ -1,9 +1,12 @@
+import java.lang.Math;
+
 float scaleFactor = 1;
 float translateX = 300;
 float translateY = 500;
 float base_color = 200;
 boolean tricorn = false;
 boolean burning_ship = false;
+boolean effect_3D = false; 
 
 int count = 0;
 
@@ -24,7 +27,7 @@ void draw() {
 
   loadPixels();
 
-  int max_iterations = 256;
+  int max_iterations = 100;
 
   for (int x = 0; x < width; x++) {
     for (int y = 0; y < height; y++) {
@@ -37,7 +40,6 @@ void draw() {
 
       double a = map(x, 0, width, sX - scaleFactor*1.5, sX + scaleFactor*1.5);
       double b = map(y, 0, height, sY - scaleFactor*1.5, sY + scaleFactor*1.5);
-
 
       int n = 0;
 
@@ -69,8 +71,11 @@ void draw() {
         n++;
 
       }
+      
+      // smooth coloring
+      float iterationScore = smoothColoring(a, b, n);
 
-      float col = map(n, 0, max_iterations, 0, 360);
+      float col = map(iterationScore, 0, max_iterations, 0, 360);
 
       if (n == max_iterations){
         pixels[loc] = color(0, 0, 0);
@@ -82,13 +87,17 @@ void draw() {
         pixels[loc] = color(col, 100, 100);
       }
 
-
-      
     }  
   }
   updatePixels();
   count++;
   
+}
+
+float smoothColoring(double a, double b, int n){
+  float iterationScore = (float) (n + 1 - Math.log(Math.log(a*a + b*b)/2)/Math.log(2));
+  iterationScore = iterationScore < 0 || iterationScore != iterationScore ? 0 : iterationScore;
+  return iterationScore;
 }
 
 void keyPressed() {
@@ -129,7 +138,10 @@ void keyPressed() {
       } else {
         burning_ship = true;
       }
+    } else if (key == 'p') {
+      saveFrame("mandelbrot_set.png");
     }
+    
 }
 
 double abs(double value){
