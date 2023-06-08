@@ -24,21 +24,21 @@ Use the following controls to interact with the visualization:
 
 ### Mandelbrot set
 
-next_a = a*a - b*b;
-next_b = 2*a*b;
+- next_a = a*a - b*b;
+- next_b = 2*a*b;
 
 
 ### Tricorn Mandelbrot set variant 
 
-next_a = a*a - b*b;
-next_b = -2*a*b;
+- next_a = a*a - b*b;
+- next_b = -2*a*b;
 
 <img src="https://github.com/F-O-N-S-E-C-A/MandelbrotSet/blob/main/img_tricorn.png" width="500">
 
 
 ### Burning ship fractal
 
-next_a = abs(a*a - b*b);
-next_b = abs(-2*a*b);
+- next_a = abs(a*a - b*b);
+- next_b = abs(-2*a*b);
 
 <img src="https://github.com/F-O-N-S-E-C-A/MandelbrotSet/blob/main/burning_ship.png" width="500">
