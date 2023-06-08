@@ -31,23 +31,23 @@ void draw() {
 
       int loc = x + y * width;
 
-      float sX = map(translateX, 0, width, -2, 2);
-      float sY = map(translateY, 0, height, -2, 2);
+      double sX = map(translateX, 0, width, -2, 2);
+      double sY = map(translateY, 0, height, -2, 2);
 
 
-      float a = map(x, 0, width, sX - scaleFactor*1.5, sX + scaleFactor*1.5);
-      float b = map(y, 0, height, sY - scaleFactor*1.5, sY + scaleFactor*1.5);
+      double a = map(x, 0, width, sX - scaleFactor*1.5, sX + scaleFactor*1.5);
+      double b = map(y, 0, height, sY - scaleFactor*1.5, sY + scaleFactor*1.5);
 
 
       int n = 0;
 
-      float c_a = a;
-      float c_b = b;
+      double c_a = a;
+      double c_b = b;
 
       while(n < max_iterations && abs(a*a + b*b) < 4){
 
-        float next_a = a*a - b*b;
-        float next_b = 2*a*b;
+        double next_a = a*a - b*b;
+        double next_b = 2*a*b;
 
         if(burning_ship){
           next_b = abs(next_b);
@@ -130,6 +130,19 @@ void keyPressed() {
         burning_ship = true;
       }
     }
+}
+
+double abs(double value){
+  if (value < 0){
+    return value * -1;
+  } else {
+    return value;
+  }
+
+}
+
+double map(double value, double istart, double istop, double ostart, double ostop) {
+  return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
 }
 
 void mouseWheel(MouseEvent event) {
