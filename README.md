@@ -15,5 +15,10 @@ Use the following controls to interact with the visualization:
 - D key: Move the fractal to the right.
 - C key: Increase the base color value.
 - H key: Toggle the iterative change of hue in the fractal.
+- T key: Show tricorn Mandelbrot set variant.
 - Mouse wheel: Zoom in (+) and out (-) based on the mouse position.
 - Mouse drag: Move the fractal based on the mouse movement.
+
+### Tricorn Mandelbrot set variant 
+
+<img src="https://github.com/F-O-N-S-E-C-A/MandelbrotSet/blob/main/img_tricorn.png" width="500">
