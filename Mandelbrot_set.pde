@@ -2,6 +2,7 @@ float scaleFactor = 1;
 float translateX = 300;
 float translateY = 500;
 float base_color = 200;
+boolean tricorn = false;
 
 int count = 0;
 
@@ -22,7 +23,7 @@ void draw() {
 
   loadPixels();
 
-  int max_iterations = 100;
+  int max_iterations = 256;
 
   for (int x = 0; x < width; x++) {
     for (int y = 0; y < height; y++) {
@@ -46,6 +47,11 @@ void draw() {
 
         float next_a = a*a - b*b;
         float next_b = 2*a*b;
+
+        if(tricorn){
+          next_b = next_b * -1;
+        }
+        
 
         a = next_a + c_a;
         b = next_b + c_b;
@@ -105,6 +111,12 @@ void keyPressed() {
       } else {
         iterate_hue = true;
       }
+    } else if (key == 't') {
+      if(tricorn){
+        tricorn = false;
+      } else {
+        tricorn = true;
+      }
     }
 }
 
@@ -122,5 +134,5 @@ void mouseWheel(MouseEvent event) {
 void mouseDragged() {
   translateX -= (mouseX - pmouseX) * scaleFactor;
   translateY -= (mouseY - pmouseY) * scaleFactor;
-
+  
 }
